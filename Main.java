@@ -30,11 +30,26 @@ public class Main {
         points.add(doZmiany);
 
         Polygon polygon = new Polygon(points);
-        System.out.println(polygon.toSVG());    
+        System.out.println(polygon.toSVG());
 
         doZmiany.setY(2137);
         points.add(new Point(80,90));
         System.out.println(polygon.toSVG());
+
+
+        Polygon polygon1 = new Polygon(polygon);
+        polygon1.setPoint(2,123,456);
+
+
+        Polygon square = new Polygon(List.of(new Point[]{new Point(0, 0),new Point(20, 0),new Point(20, 20),new Point(0, 20)}));
+
+        SvgScene svgScene = new SvgScene();
+        svgScene.addPolygone(polygon);
+        svgScene.addPolygone(square);
+
+        System.out.println(svgScene.toSVG());
+
+        System.out.println(square.boundingBox());
 
 
 //        p1.translate(-6, 5);
