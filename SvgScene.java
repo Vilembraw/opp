@@ -40,13 +40,13 @@ public class SvgScene {
         return new BoundingBox(minX, minY, maxX-minX, maxY-minY);
     }
 
-    public void save(String filePath){
-        try {
-            FileWriter writer = new FileWriter(filePath);
-            writer.write("<svg viewBox="boundingBox().x(), boundingBox().y(), boundingBox().height(), boundingBox().width());
-            writer.write("</svg>")
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public void save(String filePath){
+//        try {
+//            FileWriter writer = new FileWriter(filePath);
+//            writer.write("<svg viewBox="boundingBox().x(), boundingBox().y(), boundingBox().height(), boundingBox().width());
+//            writer.write("</svg>")
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }
