@@ -27,26 +27,26 @@ public class SvgScene {
         double minX = Double.POSITIVE_INFINITY;
         double maxX = Double.NEGATIVE_INFINITY;
 
-        double maxY = Double.POSITIVE_INFINITY;
-        double minY = Double.NEGATIVE_INFINITY;
+        double maxY = Double.NEGATIVE_INFINITY;
+        double minY = Double.POSITIVE_INFINITY;
 
         for(Polygon p : polygones){
             BoundingBox bb = p.boundingBox();
             minX = Math.min(minX, bb.x());
-            minY = Math.min(minY, bb.x());
-            maxX = Math.max(maxX, bb.x() + bb.height());
-            maxY = Math.max(maxY, bb.x() + bb.height());
+            minY = Math.min(minY, bb.y());
+            maxX = Math.max(maxX, bb.x() + bb.width());
+            maxY = Math.max(maxY, bb.y() + bb.height());
         }
         return new BoundingBox(minX, minY, maxX-minX, maxY-minY);
     }
 
-//    public void save(String filePath){
-//        try {
-//            FileWriter writer = new FileWriter(filePath);
-//            writer.write("<svg viewBox="boundingBox().x(), boundingBox().y(), boundingBox().height(), boundingBox().width());
-//            writer.write("</svg>")
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    public void save(String filePath){
+        try (FileWriter writer = new FileWriter(filePath)){
+            writer.write("<svg viewBox="+boundingBox().x() +","+boundingBox().y()+","+ boundingBox().height()+","+ boundingBox().width()+">");
+            writer.write(toSVG());
+            writer.write("</svg>");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

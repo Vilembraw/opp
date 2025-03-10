@@ -50,7 +50,7 @@ public class Main {
         System.out.println(svgScene.toSVG());
 
         System.out.println(square.boundingBox());
-
+        svgScene.save("scene.html");
 
 //        p1.translate(-6, 5);
 //        System.out.println(p1);
