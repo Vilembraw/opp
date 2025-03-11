@@ -1,10 +1,20 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Polygon {
+public class Polygon extends Shape {
     private List<Point> points = new ArrayList<Point>();
+    public Polygon(List<Point> points, Style style) {
+        super(style);
+        List<Point> newList = new ArrayList<Point>();
+        for(Point p : points){
+            newList.add(new Point(p));
+        }
+
+        this.points = newList;
+    }
 
     public Polygon(List<Point> points) {
+        super(new Style());
         List<Point> newList = new ArrayList<Point>();
         for(Point p : points){
             newList.add(new Point(p));
@@ -14,11 +24,23 @@ public class Polygon {
     }
 
     public Polygon(Polygon p){
+        super(new Style());
         List<Point> newList = new ArrayList<Point>();
         for(Point x : p.points){
             newList.add(new Point(x));
         }
         this.points = newList;
+
+    }
+
+    public Polygon(Polygon p, Style style){
+        super(style);
+        List<Point> newList = new ArrayList<Point>();
+        for(Point x : p.points){
+            newList.add(new Point(x));
+        }
+        this.points = newList;
+
     }
 
     public void setPoint(int index, double x, double y){
@@ -39,7 +61,7 @@ public class Polygon {
     }
 
     public String toSVG(){
-        return "<polygon points=\""+ toString() +"\" style=\"fill:lime;stroke:purple;stroke-width:3\" />";
+        return "<polygon points=\""+ toString() +"\" "+style.toSVG()+"/>";
     }
 
 
@@ -71,6 +93,17 @@ public class Polygon {
             }
         }
         return new BoundingBox(minX, minY, maxX - minX, maxY - minY);
+
+    }
+
+    public static Polygon square(Segment a, Style style){
+        Segment b = a.pendicular();
+        Segment c = b.pendicular();
+        Segment d = c.pendicular();
+
+        List<Point> squarePoints = List.of(a.getB(),b.getB(),c.getB(), d.getB());
+        return new Polygon(squarePoints, style);
+
 
     }
 }
