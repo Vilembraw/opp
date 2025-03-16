@@ -14,7 +14,7 @@ public class Ellipse extends Shape{
         return "<ellipse rx=\""+rx+"\" ry=\""+ry+"\" cx=\""+o.getX()+"\" cy=\""+o.getY()+"\"" +
                 "  "+style.toSvg()+" />";
     }
-
+//
     @Override
     public BoundingBox boundingBox() {
         return new BoundingBox(o.getX()-rx, o.getY()-ry, 2*rx, 2*ry);
