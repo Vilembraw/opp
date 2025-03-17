@@ -60,19 +60,12 @@ public class Main {
         System.out.println(ellipse);
         scene.addShape(ellipse);
 
-        /* TODO: klasa Text dziedzicząca po Shape
-        *  - String text
-        *  - x, y (lewy górny róg, może być Point)
-        *  - textLength (przy okazji szerokość obiektu do BoundingBox)
-        *  - fontSize (przy okazji wysokość obiektu)
-        *  + konstruktor
-        *  + toSvg()
-        *    - atrybuty: x, y, textLength, font-size, style (z klasy Style)
-        *  + boundingBox()
-        */
 
         System.out.println(polyCopy.boundingBox());
         scene.save("rysunek.svg");
+
+        Text text = new Text(style,"test",new Point(0,5),12,24);
+        System.out.println(text.toSvg());
     }
 
 
