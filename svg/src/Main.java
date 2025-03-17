@@ -62,10 +62,14 @@ public class Main {
 
 
         System.out.println(polyCopy.boundingBox());
+
+        Text text = new Text(style,"test",new Point(0,5),50,40);
+        scene.addShape(text);
+        System.out.println(text.boundingBox());
+
         scene.save("rysunek.svg");
 
-        Text text = new Text(style,"test",new Point(0,5),12,24);
-        System.out.println(text.toSvg());
+
     }
 
 

@@ -19,7 +19,7 @@ public class Text extends Shape {
         sb.append("<text ");
         sb.append("x=\"").append(point.getX()).append("\" ");;
         sb.append("y=\"").append(point.getY()).append("\" ");;
-        sb.append("text-length=\"").append(textLength).append("\" ");
+        sb.append("textLength=\"").append(textLength).append("\" "); //tutaj jakis dziwny cammelCase
         sb.append("font-size=\"").append(fontSize).append("\" ");
         sb.append(style.toSvg());
         sb.append(">");
@@ -31,7 +31,7 @@ public class Text extends Shape {
 
     @Override
     public BoundingBox boundingBox() {
-        return null;
+        return new BoundingBox(point.getX(), point.getY(), textLength, fontSize);
     }
 }
 
