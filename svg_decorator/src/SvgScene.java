@@ -37,9 +37,9 @@ public class SvgScene {
         return result;
     }
 
-    public void save(String path, String s) throws IOException {
+    public void save(String path) throws IOException {
         FileWriter writer = new FileWriter(path);
-        writer.write(toSvg(s));
+        writer.write(toSvg(""));
         writer.close();
     }
 }

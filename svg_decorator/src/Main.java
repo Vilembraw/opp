@@ -2,18 +2,12 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Polygon triangle = new Polygon(new Vec2[]{
+        Shape triangle = new Polygon(new Vec2[]{
                 new Vec2(0, 0),
                 new Vec2(300, 0),
                 new Vec2(150, 250)
         });
 
-        Polygon rectangle = new Polygon(new Vec2[]{
-                new Vec2(350, 0),
-                new Vec2(750, 0),
-                new Vec2(750, 200),
-                new Vec2(350, 200)
-        });
 
         Polygon pentagon = new Polygon(new Vec2[]{
                 new Vec2(0, 260),
@@ -23,13 +17,21 @@ public class Main {
                 new Vec2(600, 260)
         });
 
-        Ellipse ellipse = new Ellipse(new Vec2(500, 700), 400, 100);
 
+
+        SolidFillShapeDecorator redPentagon = new SolidFillShapeDecorator(pentagon,"red");
+        triangle = new StrokeShapeDecorator(triangle, "pink", 5.0);
+        triangle = new SolidFillShapeDecorator(triangle,"blue");
+
+        Shape ellipse = new Ellipse(new Vec2(500, 700), 400, 100);
+        ellipse = new SolidFillShapeDecorator(ellipse,"green");
+        ellipse = new StrokeShapeDecorator(ellipse, "yellow", 3.0);
         SvgScene scene = new SvgScene();
         scene.addShape(triangle);
-        scene.addShape(rectangle);
-        scene.addShape(pentagon);
+        scene.addShape(redPentagon);
         scene.addShape(ellipse);
-        scene.save("result.svg","");
+        scene.save("result.svg");
+
+
     }
 }

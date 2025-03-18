@@ -27,11 +27,11 @@ public class Polygon implements Shape{
     }
 
 
-    public String toSvg(String color)    {
+    public String toSvg(String input)    {
         String pointsString = "";
         for(Vec2 point : points) {
             pointsString += point.x() + "," + point.y() + " ";
         }
-        return String.format(Locale.ENGLISH, "<polygon points=\"%s\" %s/>", pointsString, color);
+        return String.format(Locale.ENGLISH, "<polygon points=\"%s\" %s/>", pointsString, input);
     }
 }

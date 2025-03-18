@@ -6,4 +6,9 @@ public class SolidFilledPolygon extends Polygon{
         super(points);
         this.color = color;
     }
+
+    @Override
+    public String toSvg(String input) {
+        return super.toSvg(String.format("fill=\"%s\" %s ", color, input));
+    }
 }
