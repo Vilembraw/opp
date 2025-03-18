@@ -6,7 +6,7 @@ public class SvgScene {
     private int ix;
 
     public SvgScene() {
-        this.shapes = new Shape[3];
+        this.shapes = new Shape[6];
         ix = 0;
     }
 
