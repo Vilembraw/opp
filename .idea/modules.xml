@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/genealogy/genealogy.iml" filepath="$PROJECT_DIR$/genealogy/genealogy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kolokwia/k2024/k2024.iml" filepath="$PROJECT_DIR$/kolokwia/k2024/k2024.iml" />
       <module fileurl="file://$PROJECT_DIR$/svg/svg.iml" filepath="$PROJECT_DIR$/svg/svg.iml" />
       <module fileurl="file://$PROJECT_DIR$/svg_decorator/svg_decorator.iml" filepath="$PROJECT_DIR$/svg_decorator/svg_decorator.iml" />
     </modules>
