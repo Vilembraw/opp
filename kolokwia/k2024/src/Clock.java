@@ -13,6 +13,6 @@ public abstract class Clock {
 
     @Override
     public String toString() {
-        return String.format("%d:%d:%d", time.getHour(), time.getMinute(), time.getSecond());
+        return String.format("%02d:%02d:%02d", time.getHour(), time.getMinute(), time.getSecond());
     }
 }
