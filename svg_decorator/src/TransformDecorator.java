@@ -18,19 +18,19 @@ public class TransformDecorator extends ShapeDecorator {
         private String transform = "";
         public Builder translate(Vec2 translation){
             this.transform += String.format(Locale.ENGLISH," translate(%f %f) ", translation.x(), translation.y());
-            this.transform += this.transform.trim();
+            this.transform = this.transform.trim();
             return this;
         }
 
         public Builder rotate(float angle, Vec2 center){
             this.transform += String.format(Locale.ENGLISH," rotate(%f %f %f) ", angle, center.x(), center.y());
-            this.transform += this.transform.trim();
+            this.transform = this.transform.trim();
             return this;
         }
 
         public Builder scale(float x, float y){
             this.transform += String.format(Locale.ENGLISH," scale(%f %f) ", x, y);
-            this.transform += this.transform.trim();
+            this.transform = this.transform.trim();
             return this;
         }
 
