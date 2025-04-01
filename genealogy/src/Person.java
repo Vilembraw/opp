@@ -73,14 +73,32 @@ public class Person implements Comparable<Person>{
         return new Person(name,surname,birth,death);
     }
 
-    public static List<Person> fromCSV(String path){
-        List<Person> persons = new ArrayList<>();
+    public static List<Person> fromCSV(String path) throws AmbiguousPersonException{
+        Map<String,Person> persons = new HashMap<>();
         try(BufferedReader br = new BufferedReader(new FileReader(path))){
             String line;
             br.readLine();
             while ((line = br.readLine()) != null) {
                 try {
-                    persons.add(fromCSVLine(line));
+                    Person p = fromCSVLine(line);
+                    if(persons.containsKey(p.getName())){
+                        throw new AmbiguousPersonException(p.getFullName());
+                    }
+                    persons.put(p.getFullName(), p);
+                    String[] parts = line.split(",", -1);
+                    Person p1 = persons.get(parts[3]);
+                    Person p2 = persons.get(parts[4]);
+
+                    if(p1 != null){
+                        p1.adopt(p);
+//                        System.out.println(p1);
+
+                    }  if(p2 != null){
+                        p2.adopt(p);
+//                        System.out.println(p2);
+                    }
+
+                    //do zrobienia 5
                 } catch (NegativeLifespanException e) {
 //                    throw new RuntimeException(e);
                     System.err.println(e.getMessage());
@@ -90,7 +108,7 @@ public class Person implements Comparable<Person>{
             e.printStackTrace();
         }
 
-        return persons;
+        return new ArrayList<>(persons.values());
     }
 
     public boolean adopt(Person person) {
@@ -129,6 +147,10 @@ public class Person implements Comparable<Person>{
         }
         return null;
 
+    }
+
+    public String getFullName(){
+        return name + " "  + surname;
     }
 
     @Override

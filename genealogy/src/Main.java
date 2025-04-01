@@ -2,6 +2,10 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(Person.fromCSV("family.csv"));
+        try {
+            Person.fromCSV("family.csv");
+        } catch (AmbiguousPersonException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }
