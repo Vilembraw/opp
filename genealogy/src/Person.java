@@ -1,4 +1,8 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -9,12 +13,20 @@ public class Person implements Comparable<Person>{
     private String name;
     private String surname;
     private LocalDate birth;
+    private LocalDate death;
     private Set<Person> children = new HashSet<>();
 
     public Person(String name, String surname, LocalDate birth) {
         this.name = name;
         this.surname = surname;
         this.birth = birth;
+    }
+
+    public Person(String name, String surname, LocalDate birth, LocalDate death) {
+        this.name = name;
+        this.surname = surname;
+        this.birth = birth;
+        this.death = death;
     }
 
     public String getName() {
@@ -26,6 +38,34 @@ public class Person implements Comparable<Person>{
         this.surname = surname;
         this.birth = birth;
         this.children = children;
+    }
+
+    public static Person fromCSVLine(String line) {
+        String[] parts = line.split(",",-1);
+        String name = parts[0].split(" ")[0];
+        String surname = parts[0].split(" ")[1];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+//        DateTimeFormatter customFormatter = new DateTimeFormatterBuilder()
+//                .appendValue(ChronoField.DAY_OF_MONTH,2)
+//                .appendLiteral(".")
+//                .appendText(ChronoField.MONTH_OF_YEAR)
+//                .appendLiteral(".")
+//                .appendValue(ChronoField.YEAR,4)
+//                .toFormatter();
+
+        LocalDate birth = LocalDate.parse(parts[1],formatter);
+        LocalDate death;
+        try{
+            death = LocalDate.parse(parts[2],formatter);
+        }
+        catch(DateTimeParseException e){
+            death = null;
+//            System.err.println(e.getMessage());
+        }
+
+
+        return new Person(name,surname,birth,death);
     }
 
     public boolean adopt(Person person) {
@@ -72,6 +112,7 @@ public class Person implements Comparable<Person>{
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", birth=" + birth +
+                ", death=" + death +
                 ", children=" + children +
                 '}';
     }
