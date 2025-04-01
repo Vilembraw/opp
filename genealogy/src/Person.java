@@ -1,12 +1,11 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Person implements Comparable<Person>{
@@ -66,6 +65,21 @@ public class Person implements Comparable<Person>{
 
 
         return new Person(name,surname,birth,death);
+    }
+
+    public static List<Person> fromCSV(String path){
+        List<Person> persons = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader(path))){
+            String line;
+            br.readLine();
+            while ((line = br.readLine()) != null) {
+                persons.add(fromCSVLine(line));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return persons;
     }
 
     public boolean adopt(Person person) {
