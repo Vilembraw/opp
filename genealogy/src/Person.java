@@ -21,11 +21,17 @@ public class Person implements Comparable<Person>{
         this.birth = birth;
     }
 
-    public Person(String name, String surname, LocalDate birth, LocalDate death) {
+    public Person(String name, String surname, LocalDate birth, LocalDate death) throws NegativeLifespanException {
         this.name = name;
         this.surname = surname;
         this.birth = birth;
         this.death = death;
+
+        if(death != null){
+            if(death.isBefore(birth)){
+                throw new NegativeLifespanException("death before birth");
+            }
+        }
     }
 
     public String getName() {
@@ -39,7 +45,7 @@ public class Person implements Comparable<Person>{
         this.children = children;
     }
 
-    public static Person fromCSVLine(String line) {
+    public static Person fromCSVLine(String line) throws NegativeLifespanException {
         String[] parts = line.split(",",-1);
         String name = parts[0].split(" ")[0];
         String surname = parts[0].split(" ")[1];
@@ -73,7 +79,12 @@ public class Person implements Comparable<Person>{
             String line;
             br.readLine();
             while ((line = br.readLine()) != null) {
-                persons.add(fromCSVLine(line));
+                try {
+                    persons.add(fromCSVLine(line));
+                } catch (NegativeLifespanException e) {
+//                    throw new RuntimeException(e);
+                    System.err.println(e.getMessage());
+                }
             }
         }catch(Exception e){
             e.printStackTrace();
