@@ -14,6 +14,7 @@ public class Main {
             System.out.println("\n");
             System.out.println(Person.selectSurnames(p,"Kowalski"));
             System.out.println("\n");
+            System.out.println(Person.selectDead(p) +"\n");
 
             System.out.println(Person.sortedByBirth(p));
             try {

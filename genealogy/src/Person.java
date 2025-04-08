@@ -284,4 +284,16 @@ public class Person implements Comparable<Person>{
     public static List<Person> sortedByBirth(List<Person> personList){
         return personList.stream().sorted().collect(Collectors.toList());
     }
+
+    public LocalDate getDeath() {
+        return death;
+    }
+
+    public LocalDate getBirth() {
+        return birth;
+    }
+
+    public static List<Person> selectDead(List<Person> personList){
+        return personList.stream().filter(p -> p.getDeath() == null).collect(Collectors.toList());
+    }
 }
