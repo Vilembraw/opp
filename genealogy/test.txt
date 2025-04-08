@@ -1,0 +1,11 @@
+@startuml
+object person1{
+	imie = "Ala"
+}
+
+object person2{
+	imie = "Bober"
+}
+
+person1 -> person2: test
+@enduml

@@ -1,9 +1,23 @@
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        PlantUMLRunner.setPath("/home/vilem/Downloads/plant.jar");
+        String data = "Alice -> Bob";
+
+
         try {
-            Person.fromCSV("family.csv");
+            List<Person> p = Person.fromCSV("family.csv");
+            System.out.println(Person.umlFromList(p));
+
+            try {
+                PlantUMLRunner.generate(Person.umlFromList(p),"/home/vilem/Downloads/out", "diagram.png");
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
         } catch (AmbiguousPersonException e) {
             System.err.println(e.getMessage());
         }
