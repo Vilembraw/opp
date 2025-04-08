@@ -294,6 +294,13 @@ public class Person implements Comparable<Person>{
     }
 
     public static List<Person> selectDead(List<Person> personList){
-        return personList.stream().filter(p -> p.getDeath() == null).collect(Collectors.toList());
+        return personList.stream().filter(p -> p.getDeath() != null).sorted(Comparator.comparing(p -> ChronoUnit.DAYS.between(p.death,p.birth))).collect(Collectors.toList());
+    }
+
+    public static Person getOldest(List<Person> personList){
+        return personList.stream()
+                .filter(p -> p.getDeath() == null)
+                .max(Comparator.comparing(p -> ChronoUnit.DAYS.between(p.getBirth(), LocalDate.now())))
+                .orElse(null);
     }
 }

@@ -11,12 +11,13 @@ public class Main {
         try {
             List<Person> p = Person.fromCSV("family.csv");
 //            System.out.println(Person.umlFromList(p));
-            System.out.println("\n");
-            System.out.println(Person.selectSurnames(p,"Kowalski"));
-            System.out.println("\n");
-            System.out.println(Person.selectDead(p) +"\n");
+//            System.out.println("\n");
+//            System.out.println(Person.selectSurnames(p,"Kowalski"));
+//            System.out.println("\n");
+//            System.out.println(Person.selectDead(p) +"\n");
+            System.out.println(Person.getOldest(p) +"\n");
 
-            System.out.println(Person.sortedByBirth(p));
+//            System.out.println(Person.sortedByBirth(p));
             try {
                 PlantUMLRunner.generate(Person.umlFromList(p),"/home/vilem/Downloads/out", "diagram.png");
             } catch (IOException | InterruptedException e) {
