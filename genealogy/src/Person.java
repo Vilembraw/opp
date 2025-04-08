@@ -280,4 +280,8 @@ public class Person implements Comparable<Person>{
 //        return result;
         return personList.stream().filter( p -> p.getSurname().toLowerCase().contains(substring.toLowerCase())).collect(Collectors.toList());
     }
+
+    public static List<Person> sortedByBirth(List<Person> personList){
+        return personList.stream().sorted().collect(Collectors.toList());
+    }
 }
