@@ -6,6 +6,8 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Person implements Comparable<Person>{
@@ -243,11 +245,15 @@ public class Person implements Comparable<Person>{
         return stringBuilder.toString();
     }
 
-    public static String umlFromList(List<Person> personList){
+    public static String umlFromList(List<Person> personList, Function<String, String> postprocess, Predicate<Person> condition){
         StringBuilder stringBuilder = new StringBuilder();
 
         for(Person person : personList){
-            stringBuilder.append(person.getUMLObject());
+            String umlPerson = person.getUMLObject();
+            if(condition.test(person)){
+                umlPerson = postprocess.apply(umlPerson);
+            }
+            stringBuilder.append(umlPerson);
         }
 
         for(Person person : personList){
