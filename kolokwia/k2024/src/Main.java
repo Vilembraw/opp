@@ -31,12 +31,11 @@ public class Main {
         System.out.println(cities.toString());
         City lublin = cities.get("Lublin");
         City londyn = cities.get("Londyn");
-        DigitalClock clock = new DigitalClock(londyn,DigitalClock.Type.h24);
-        clock.setTime(23,59,59);
-        System.out.println(clock.toString());
-        clock.setCity(lublin);
+        DigitalClock clock = new DigitalClock(lublin,DigitalClock.Type.h24);
+        clock.setTime(12,0,0);
         System.out.println(clock.toString());
 
+        System.out.println(lublin.localMeanTime(clock.getTime()));
 
 
     }

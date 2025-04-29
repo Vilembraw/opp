@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.time.LocalTime;
 import java.util.HashMap;
 
 public class City {
@@ -43,6 +44,22 @@ public class City {
             parts[2],
             parts[3]
         );
+
+    }
+
+    public LocalTime localMeanTime(LocalTime time){
+        LocalTime newTime = time.minusHours(this.strefaCzasowa);
+        String partsDlugosc[] = this.dlugoscGeograficzna.trim().split(" ");
+//        System.out.println(partsDlugosc.length);
+                double szerokoscValue = Double.parseDouble(partsDlugosc[0]);
+        double offset = szerokoscValue * 4 * 60;
+        if(partsDlugosc[1].equals("E")){
+            newTime = newTime.plusSeconds((long) offset);
+        }else if(partsDlugosc[1].equals("W")){
+            newTime = newTime.minusSeconds((long) offset);
+        }
+
+        return newTime;
 
     }
 }
