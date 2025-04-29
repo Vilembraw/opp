@@ -5,7 +5,8 @@ public class DigitalClock extends Clock {
     }
     private Type type;
 
-    public DigitalClock(Type type) {
+    public DigitalClock(City city, Type type) {
+        super(city);
         this.type = type;
     }
 

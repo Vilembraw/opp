@@ -35,7 +35,7 @@ public class City {
     }
 
 
-    public static City parseLine(String line) {
+    private static City parseLine(String line) {
         String parts[] = line.split(",");
         return new City(
             parts[0],

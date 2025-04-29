@@ -1,10 +1,31 @@
 import java.time.LocalTime;
 
+import static java.lang.Math.abs;
+
 public abstract class Clock {
     LocalTime time;
+    private City city;
 
-    public void setCurrentTime(){
+    public Clock(City city) {
+        this.city = city;
+    }
+
+    public void setCity(City city) {
+        City oldCity = this.city;
+        int roznica = city.strefaCzasowa - oldCity.strefaCzasowa;
+        LocalTime newTime = getTime().plusHours(roznica);
+        this.time = newTime;
+        this.city = city;
+
+    }
+
+        public void setCurrentTime(){
        this.time = LocalTime.now();
+    }
+
+
+    public LocalTime getTime() {
+        return time;
     }
 
     public void setTime(int hour, int minute, int sec){
