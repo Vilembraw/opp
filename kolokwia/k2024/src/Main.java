@@ -1,4 +1,5 @@
-import java.util.HashMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,18 +27,22 @@ public class Main {
 //        System.out.println(clock1.toString());
 //        System.out.println(clock2.toString());
 
-
+//
         HashMap<String, City> cities = City.parseFile("strefy.csv");
-        System.out.println(cities.toString());
-        City lublin = cities.get("Lublin");
-        City londyn = cities.get("Londyn");
-        DigitalClock clock = new DigitalClock(lublin,DigitalClock.Type.h24);
-        clock.setTime(12,0,0);
-        System.out.println(clock.toString());
+//        System.out.println(cities.size());
+//        System.out.println(cities.toString());
+//        City lublin = cities.get("Lublin");
+//        City londyn = cities.get("Londyn");
+//        DigitalClock clock = new DigitalClock(lublin,DigitalClock.Type.h24);
+//        clock.setTime(12,0,0);
+//        System.out.println(clock.toString());
+//
+//        System.out.println(lublin.localMeanTime(clock.getTime()));
 
-        System.out.println(lublin.localMeanTime(clock.getTime()));
-
-
+        List<String> sorted = cities.entrySet().stream().sorted((e1,e2) -> City.worstTimeZoneFit(e2.getValue(),e1.getValue())).map(Map.Entry::getKey).collect(Collectors.toList());
+        for (String s : sorted) {
+            System.out.println(s);
+        }
     }
 
 }

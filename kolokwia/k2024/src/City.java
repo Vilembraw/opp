@@ -24,7 +24,7 @@ public class City {
 
             String line;
             while((line = br.readLine() )!= null){
-                City city = parseLine(br.readLine());
+                City city = parseLine(line); //fix dla wczytywania
                 cities.put(city.name, city);
             }
 
@@ -61,5 +61,18 @@ public class City {
 
         return newTime;
 
+    }
+
+    public int diffTime(){
+        LocalTime time = LocalTime.now();
+        LocalTime meanTime = localMeanTime(time);
+
+        int minutes =  time.getHour() * 60 + time.getMinute();
+        int meanMinutes = meanTime.getHour() * 60 + meanTime.getMinute();
+        return Math.abs(minutes-meanMinutes);
+    }
+
+    public static int worstTimeZoneFit(City cityA, City cityB){
+        return Integer.compare(cityA.diffTime(), cityB.diffTime());
     }
 }
