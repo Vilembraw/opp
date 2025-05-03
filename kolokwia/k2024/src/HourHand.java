@@ -1,0 +1,24 @@
+import java.time.LocalTime;
+
+public class HourHand extends ClockHand{
+    //  <line x1="0" y1="0" x2="0" y2="-80" stroke="red" stroke-width="1" />
+    Double x;
+    Double y;
+
+    @Override
+    public void setTime(LocalTime time) {
+        double angle = (time.getHour() % 12) * 30 + time.getMinute() * 0.5;
+        this.x = 40 * (Math.cos(Math.toRadians(angle)));
+        this.y = 40 * (Math.sin(Math.toRadians(angle)));
+    }
+
+    @Override
+    public String toSVG() {
+        //  <!-- Sekundy -->
+        //  <line x1="0" y1="0" x2="0" y2="-80" stroke="red" stroke-width="1" />
+        StringBuilder sb = new StringBuilder();
+        sb.append("<!-- Godziny -->");
+        sb.append(String.format("\n<line x1=\"0\" y1=\"0\" x2=\"%.2f\" y2=\"%.2f\" stroke=\"green\" stroke-width=\"4\" \n/>",this.x, this.y));
+        return sb.toString();
+    }
+}
