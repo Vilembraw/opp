@@ -8,4 +8,10 @@
     <text x="-80" y="0" dy="4">9</text>
   </g>
 
-</svg>
+<!-- Godziny -->
+<line x1="0" y1="0" x2="0.00" y2="40.00" stroke="green" stroke-width="4" 
+/><!-- Minuty -->
+<line x1="0" y1="0" x2="0.00" y2="-60.00" stroke="black" stroke-width="2" 
+/><!-- Sekundy -->
+<line x1="0" y1="0" x2="80.00" y2="0.00" stroke="red" stroke-width="1" 
+/></svg>

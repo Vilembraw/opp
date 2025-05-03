@@ -45,6 +45,8 @@ public class Main {
 //        }
 
         AnalogClock analogClock = new AnalogClock(lublin);
+        analogClock.setTime(18,0,15);
+        System.out.println(analogClock.getTime());
         analogClock.toSVG("zegarek.svg");
     }
 

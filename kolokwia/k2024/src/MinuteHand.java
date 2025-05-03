@@ -8,8 +8,8 @@ public class MinuteHand extends ClockHand{
     @Override
     public void setTime(LocalTime time) {
         double angle = time.getMinute() * 6;
-        this.x = 60 * (Math.cos(Math.toRadians(angle)));
-        this.y = 60 * (Math.sin(Math.toRadians(angle)));
+        this.x = 60 * (Math.cos(Math.toRadians(angle - 90)));
+        this.y = 60 * (Math.sin(Math.toRadians(angle - 90)));
     }
 
     @Override
