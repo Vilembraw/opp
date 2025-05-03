@@ -31,7 +31,7 @@ public class Main {
         HashMap<String, City> cities = City.parseFile("strefy.csv");
 //        System.out.println(cities.size());
 //        System.out.println(cities.toString());
-//        City lublin = cities.get("Lublin");
+        City lublin = cities.get("Lublin");
 //        City londyn = cities.get("Londyn");
 //        DigitalClock clock = new DigitalClock(lublin,DigitalClock.Type.h24);
 //        clock.setTime(12,0,0);
@@ -39,10 +39,13 @@ public class Main {
 //
 //        System.out.println(lublin.localMeanTime(clock.getTime()));
 
-        List<String> sorted = cities.entrySet().stream().sorted((e1,e2) -> City.worstTimeZoneFit(e2.getValue(),e1.getValue())).map(Map.Entry::getKey).collect(Collectors.toList());
-        for (String s : sorted) {
-            System.out.println(s);
-        }
+//        List<String> sorted = cities.entrySet().stream().sorted((e1,e2) -> City.worstTimeZoneFit(e2.getValue(),e1.getValue())).map(Map.Entry::getKey).collect(Collectors.toList());
+//        for (String s : sorted) {
+//            System.out.println(s);
+//        }
+
+        AnalogClock analogClock = new AnalogClock(lublin);
+        analogClock.toSVG("zegarek.svg");
     }
 
 }
