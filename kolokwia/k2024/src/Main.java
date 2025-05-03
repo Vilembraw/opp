@@ -44,10 +44,11 @@ public class Main {
 //            System.out.println(s);
 //        }
 
+        List<City> cityList = cities.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
         AnalogClock analogClock = new AnalogClock(lublin);
         analogClock.setTime(18,0,15);
         System.out.println(analogClock.getTime());
-        analogClock.toSVG("zegarek.svg");
+        City.generateAnalogClocksSvg(cityList, analogClock);
     }
 
 }

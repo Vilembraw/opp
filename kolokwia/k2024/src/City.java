@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.List;
 
 public class City {
     String name;
@@ -74,5 +76,20 @@ public class City {
 
     public static int worstTimeZoneFit(City cityA, City cityB){
         return Integer.compare(cityA.diffTime(), cityB.diffTime());
+    }
+
+
+    public static void generateAnalogClocksSvg(List<City> cities, AnalogClock analogClock){
+        File dirs = new File(analogClock.toString());
+        String dirName = analogClock.toString();
+        if(!dirs.exists()){
+            dirs.mkdirs();
+        }
+
+        for(City city : cities){
+            analogClock.setCity(city);
+            analogClock.toSVG(dirName+"/"+city.name+".svg");
+
+        }
     }
 }
