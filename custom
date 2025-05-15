@@ -1,0 +1,137 @@
+import java.util.AbstractList;
+import java.util.NoSuchElementException;
+
+public class CustomList<T> extends AbstractList<T> {
+    private static class Node<T> {
+        T value;
+        Node<T> next;
+        
+        Node(T value) {
+            this.value = value;
+            this.next = null;
+        }
+    }
+    
+    private Node<T> head;
+    private Node<T> tail;
+    private int size;
+    
+    public CustomList() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
+    
+    // Metoda add działająca jak addLast (wymagana przez AbstractList)
+    @Override
+    public boolean add(T t) {
+        addLast(t);
+        return true;
+    }
+    
+    // Dodaje wartość na koniec listy
+    public void addLast(T value) {
+        Node<T> newNode = new Node<>(value);
+        if (tail == null) {
+            head = tail = newNode;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
+        }
+        size++;
+    }
+    
+    // Zwraca wartość z końca listy
+    public T getLast() {
+        if (tail == null) {
+            throw new NoSuchElementException("List is empty");
+        }
+        return tail.value;
+    }
+    
+    // Dodaje wartość na początek listy
+    public void addFirst(T value) {
+        Node<T> newNode = new Node<>(value);
+        if (head == null) {
+            head = tail = newNode;
+        } else {
+            newNode.next = head;
+            head = newNode;
+        }
+        size++;
+    }
+    
+    // Zwraca wartość z początku listy
+    public T getFirst() {
+        if (head == null) {
+            throw new NoSuchElementException("List is empty");
+        }
+        return head.value;
+    }
+    
+    // Usuwa i zwraca element z początku listy
+    public T removeFirst() {
+        if (head == null) {
+            throw new NoSuchElementException("List is empty");
+        }
+        
+        T value = head.value;
+        head = head.next;
+        
+        if (head == null) {
+            tail = null;
+        }
+        
+        size--;
+        return value;
+    }
+    
+    // Usuwa i zwraca element z końca listy
+    public T removeLast() {
+        if (tail == null) {
+            throw new NoSuchElementException("List is empty");
+        }
+        
+        T value = tail.value;
+        
+        if (head == tail) {
+            head = tail = null;
+        } else {
+            Node<T> current = head;
+            while (current.next != tail) {
+                current = current.next;
+            }
+            current.next = null;
+            tail = current;
+        }
+        
+        size--;
+        return value;
+    }
+    
+    // Zwraca rozmiar listy (wymagana przez AbstractList)
+    @Override
+    public int size() {
+        return size;
+    }
+    
+    // Zwraca element o podanym indeksie (wymagana przez AbstractList)
+    @Override
+    public T get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+        
+        Node<T> current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        
+        return current.value;
+    }
+    
+    // Dodatkowe metody
+    public boolean isEmpty() {
+        return head == null;
+    }
+}
