@@ -22,4 +22,28 @@ public class Testy {
         playlist.add(new Song("Dio","Holydiver", 60));
         assertEquals(playlist.size(), 1);
     }
+
+    @Test
+    public void tensam(){
+//        Napisz jest sprawdzający, czy po dodaniu jednego utworu, jest w nim ten sam utwór.        Playlist playlist = new Playlist();
+        Playlist playlist = new Playlist();
+        Song song = new Song("Dio","Holydiver", 60);
+        playlist.add(song);
+        assertEquals(playlist.getFirst(), song);
+    }
+
+    @Test
+    public void playlist(){
+//        Napisz jest sprawdzający, czy po dodaniu jednego utworu, jest w nim ten sam utwór.        Playlist playlist = new Playlist();
+        Playlist playlist = new Playlist();
+        Song song = new Song("Dio","Holydiver", 60);
+        Song song1 = new Song("Iron Maiden","Fear of the Dark", 60);
+        playlist.add(song);
+        playlist.add(song1);
+        assertEquals(playlist.atSecond(61), song1);
+    }
+
+
+
+
 }
