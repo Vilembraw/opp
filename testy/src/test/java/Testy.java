@@ -1,7 +1,14 @@
+import org.example.DatabaseConnection;
 import org.example.Playlist;
 import org.example.Song;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,12 +89,45 @@ public class Testy {
         assertEquals(new Song("The Beatles","Hey Jude",431), s1.get());
     }
 
+
     @Test
     public void zlyindex(){
         Song.Persistance persistance = new Song.Persistance();
         Optional<Song> s1 = persistance.read(2137);
         assertEquals(false, s1.isPresent());
     }
+
+    @Before
+    public void connect(){
+        DatabaseConnection.connect("songs.db", "testy");
+    }
+
+    @Test
+    public void zlyindexAdnotacje() {
+        String sql = "SELECT artist, title, length FROM song WHERE id = ?";
+        try {
+            int index = 2137;
+            PreparedStatement statement = DatabaseConnection.getConnection("testy").prepareStatement(sql);
+            statement.setInt(1, index);
+            ResultSet resultSet = statement.executeQuery();
+            Optional<Song> songOption = Optional.empty();
+
+            if (resultSet.next()) {
+                songOption =  Optional.of(new Song(resultSet.getString("artist"), resultSet.getString("title"), resultSet.getInt("length")));
+            }
+
+            assertEquals(false, songOption.isPresent());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+        @After
+    public void disconnect(){
+        DatabaseConnection.disconnect("testy");
+    }
+
+
 
 
 
