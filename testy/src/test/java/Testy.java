@@ -3,6 +3,7 @@ import org.example.Song;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
@@ -73,6 +74,13 @@ public class Testy {
         assertEquals("zadany czas jest ujemny", exception.getMessage());
     }
 
+
+    @Test
+    public void odczyt(){
+        Song.Persistance persistance = new Song.Persistance();
+        Optional<Song> s1 = persistance.read(1);
+        assertEquals(new Song("The Beatles","Hey Jude",431), s1.get());
+    }
 
 
 
