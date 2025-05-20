@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class Testy {
 
@@ -44,14 +45,32 @@ public class Testy {
     }
 
     @Test
-    public void playlist1(){
+    public void playlistzaduzo(){
 //      1g
         Playlist playlist = new Playlist();
         Song song = new Song("Dio","Holydiver", 60);
         Song song1 = new Song("Iron Maiden","Fear of the Dark", 60);
         playlist.add(song);
         playlist.add(song1);
-        assertEquals(playlist.atSecond(124), song1);
+        Exception exception = assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> playlist.atSecond(1000)
+        );
+        assertEquals("zadany czas jest pozniejszy niz czas odtwarzania playlisty", exception.getMessage());    }
+
+    @Test
+    public void playlistujemna(){
+//      1g
+        Playlist playlist = new Playlist();
+        Song song = new Song("Dio","Holydiver", 60);
+        Song song1 = new Song("Iron Maiden","Fear of the Dark", 60);
+        playlist.add(song);
+        playlist.add(song1);
+        Exception exception = assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> playlist.atSecond(-1)
+        );
+        assertEquals("zadany czas jest ujemny", exception.getMessage());
     }
 
 

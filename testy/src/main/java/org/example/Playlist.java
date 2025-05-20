@@ -7,6 +7,9 @@ public class Playlist extends ArrayList<Song> {
         if(this.isEmpty())
             throw new RuntimeException("playlista jest pusta");
 
+        if(second < 0){
+            throw new IndexOutOfBoundsException("zadany czas jest ujemny");
+        }
         for(Song song : this){
             if(song.duration() < second){
                 second -= song.duration();
