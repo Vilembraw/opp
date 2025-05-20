@@ -82,6 +82,13 @@ public class Testy {
         assertEquals(new Song("The Beatles","Hey Jude",431), s1.get());
     }
 
+    @Test
+    public void zlyindex(){
+        Song.Persistance persistance = new Song.Persistance();
+        Optional<Song> s1 = persistance.read(2137);
+        assertEquals(false, s1.isPresent());
+    }
+
 
 
 }
