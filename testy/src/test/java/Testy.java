@@ -1,19 +1,23 @@
 import org.example.DatabaseConnection;
 import org.example.Playlist;
 import org.example.Song;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Testy {
 
@@ -97,8 +101,8 @@ public class Testy {
         assertEquals(false, s1.isPresent());
     }
 
-    @Before
-    public void connect(){
+    @BeforeAll
+    public static void connect(){
         DatabaseConnection.connect("songs.db", "testy");
     }
 
@@ -122,9 +126,36 @@ public class Testy {
         }
     }
 
-        @After
-    public void disconnect(){
+        @AfterAll
+    public static void disconnect(){
         DatabaseConnection.disconnect("testy");
+    }
+
+
+
+    static Stream<Arguments> provideIndexesAndExpectedSongs() {
+        return Stream.of(
+                Arguments.of(1,"Hey Jude"),
+                Arguments.of(2,"(I Can't Get No) Satisfaction"),
+                Arguments.of(3,"Stairway to Heaven")
+
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideIndexesAndExpectedSongs")
+    public void parametryzowany(int index, String expectedSong){
+        Song.Persistance persistance = new Song.Persistance();
+        Song s = persistance.read(index).get();
+        assertEquals(expectedSong, s.title());
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "./songs.csv", numLinesToSkip = 1)
+    public void parametryzowanycsv(int index, String artist, String expectedSong, int duration){
+        Song.Persistance persistance = new Song.Persistance();
+        Song s = persistance.read(index).get();
+        assertEquals(expectedSong, s.title());
     }
 
 
