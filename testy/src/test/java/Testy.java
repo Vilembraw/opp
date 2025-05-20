@@ -34,13 +34,24 @@ public class Testy {
 
     @Test
     public void playlist(){
-//        Napisz jest sprawdzający, czy po dodaniu jednego utworu, jest w nim ten sam utwór.        Playlist playlist = new Playlist();
+//        1f
         Playlist playlist = new Playlist();
         Song song = new Song("Dio","Holydiver", 60);
         Song song1 = new Song("Iron Maiden","Fear of the Dark", 60);
         playlist.add(song);
         playlist.add(song1);
         assertEquals(playlist.atSecond(61), song1);
+    }
+
+    @Test
+    public void playlist1(){
+//      1g
+        Playlist playlist = new Playlist();
+        Song song = new Song("Dio","Holydiver", 60);
+        Song song1 = new Song("Iron Maiden","Fear of the Dark", 60);
+        playlist.add(song);
+        playlist.add(song1);
+        assertEquals(playlist.atSecond(124), song1);
     }
 
 

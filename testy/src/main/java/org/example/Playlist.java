@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 public class Playlist extends ArrayList<Song> {
     public Song atSecond(int second){
+        if(this.isEmpty())
+            throw new RuntimeException("playlista jest pusta");
+
         for(Song song : this){
             if(song.duration() < second){
                 second -= song.duration();
@@ -11,6 +14,6 @@ public class Playlist extends ArrayList<Song> {
                 return song;
             }
         }
-        return null;
+        throw new IndexOutOfBoundsException("zadany czas jest pozniejszy niz czas odtwarzania playlisty");
     }
 }
