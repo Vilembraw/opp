@@ -1,8 +1,9 @@
-package org.example;
+package org.example.auth;
 
 
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import org.example.database.DatabaseConnection;
 
 import javax.naming.AuthenticationException;
 import java.sql.PreparedStatement;

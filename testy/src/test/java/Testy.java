@@ -1,6 +1,6 @@
-import org.example.DatabaseConnection;
-import org.example.Playlist;
-import org.example.Song;
+import org.example.database.DatabaseConnection;
+import org.example.music.Playlist;
+import org.example.music.Song;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

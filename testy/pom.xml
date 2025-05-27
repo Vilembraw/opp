@@ -54,4 +54,33 @@
         </dependency>
     </dependencies>
 
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Package</name>
+            <url>https://maven.pkg.github.com/Vilembraw/site</url>
+        </repository>
+    </distributionManagement>
+
+
+    <build>
+        <plugins>
+            <!-- Plugin do dołączania źródeł -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
