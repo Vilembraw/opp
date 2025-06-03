@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/genealogy/site/pom.xml" />
         <option value="$PROJECT_DIR$/icd/pom.xml" />
         <option value="$PROJECT_DIR$/testy/pom.xml" />
+        <option value="$PROJECT_DIR$/serversocket/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

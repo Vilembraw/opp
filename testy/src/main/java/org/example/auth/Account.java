@@ -36,6 +36,7 @@ public class Account {
     }
 
     public static class Persistence {
+
         public static void init() {
             try {
                 String createSQLTable = "CREATE TABLE IF NOT EXISTS account( " +

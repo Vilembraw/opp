@@ -1,15 +1,16 @@
+import org.example.auth.Account;
+import org.example.auth.ListenerAccount;
 import org.example.database.DatabaseConnection;
 import org.example.music.Playlist;
 import org.example.music.Song;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 
+import javax.naming.AuthenticationException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -159,7 +160,58 @@ public class Testy {
     }
 
 
+    @BeforeEach
+    public void connect_() throws SQLException {
+        DatabaseConnection.connect("users.db");
+        ListenerAccount.Persistence.init();
+    }
 
+    @Test
+    public void register(){
+        try {
+            int id = ListenerAccount.Persistence.register("test","test");
+            assertEquals(id > 0, true);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    @Test
+    public void login(){
+        try {
+            ListenerAccount.Persistence.register("test1","test1");
+            Account acc = Account.Persistence.authenticate("test1", "test1");
+            assertEquals(acc.getUsername(), "test1");
+        } catch (SQLException | AuthenticationException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void pustystan() throws SQLException, AuthenticationException {
+        ListenerAccount.Persistence.register("test3","test3");
+        Account acc = Account.Persistence.authenticate("test3", "test3");
+//        ListenerAccount.Persistence.addCredits(1,1000);
+        int c = ListenerAccount.Persistence.getCredits(acc.getId());
+        assertEquals(c,0);
+
+    }
+
+    @Test
+    public void dodawanieKredytow() throws SQLException, AuthenticationException {
+        ListenerAccount.Persistence.register("test3","test3");
+        Account acc = Account.Persistence.authenticate("test3", "test3");
+//        ListenerAccount.Persistence.addCredits(1,1000);
+        int c = ListenerAccount.Persistence.getCredits(acc.getId());
+        int amount = 100;
+        ListenerAccount.Persistence.addCredits(acc.getId(),amount);
+        int c1 = ListenerAccount.Persistence.getCredits(acc.getId());
+        assertEquals(c+amount,c1);
+    }
+
+    @AfterEach
+    public void disconnect_() throws SQLException {
+        DatabaseConnection.disconnect();
+    }
 
 }

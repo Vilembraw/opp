@@ -7,6 +7,10 @@
     <groupId>org.example</groupId>
     <artifactId>testy</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>thready</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
