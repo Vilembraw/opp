@@ -41,7 +41,9 @@ public class Main {
 
 
         imageHandler.loadImage("thready/ksiek.jpg");
+        imageHandler.saveImage("thready/red.jpg", imageHandler.generateHistogramImage("red"));
         imageHandler.saveImage("thready/green.jpg", imageHandler.generateHistogramImage("green"));
+        imageHandler.saveImage("thready/blue.jpg", imageHandler.generateHistogramImage("blue"));
 
     }
 }

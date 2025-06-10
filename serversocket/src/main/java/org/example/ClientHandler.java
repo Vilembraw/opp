@@ -69,7 +69,7 @@ public class ClientHandler implements Runnable {
             out.println("Enter your login");
             String message = in.readLine();
             this.login = message;
-            broadcast(this.login + " polaczyl sie");
+            broadcast("LOGIN " + this.login + " polaczyl sie");
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
                 System.out.println("<Server> " +this.login + ":" + inputLine);
